@@ -15,11 +15,11 @@
 			<TABLE id="TableInput" cellSpacing="1" cellPadding="1" width="380" border="0"  >
 				<TR>
 					<TD>Serveur MySQL (s)</TD>
-					<TD><INPUT id="inputSrv" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputSrv'];} else {echo getenv(getenv('MYSQL_SERVICE_NAME').'_SERVICE_HOST') ;} ?>" name="inputSrv"></TD>
+					<TD><INPUT id="inputSrv" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputSrv'];} else {echo getenv(strtoupper(getenv('MYSQL_SERVICE_NAME')).'_SERVICE_HOST') ;} ?>" name="inputSrv"></TD>
 				</TR>
 				<TR>
 					<TD>Port (p)</TD>
-					<TD><INPUT id="inputPort" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputPort'];} else {echo getenv(getenv('MYSQL_SERVICE_NAME').'_SERVICE_PORT') ;} ?>" name="inputPort"></TD>
+					<TD><INPUT id="inputPort" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputPort'];} else {echo getenv(strtoupper(getenv('MYSQL_SERVICE_NAME')).'_SERVICE_PORT') ;} ?>" name="inputPort"></TD>
 				</TR>
 				<TR>
 					<TD>Utilisateur (u)</TD>
@@ -181,21 +181,25 @@
 			$db_host = $_GET['s'];
 		} else {
 			$db_host = "127.0.0.1";
+      $db_host =getenv(strtoupper(getenv('MYSQL_SERVICE_NAME')).'_SERVICE_HOST');
 		}
 		if(isset($_GET['p'])) {
 			$db_port = $_GET['p'];
 		} else {
 			$db_port ="3306";
+      $db_port =getenv(strtoupper(getenv('MYSQL_SERVICE_NAME')).'_SERVICE_PORT');
 		}
 		if(isset($_GET['u'])) {
 			$db_user = $_GET['u'];
 		} else {
 			$db_user ="root";
+      $db_user =getenv('MYSQL_USER');
 		}
 		if(isset($_GET['pw'])) {
 			$db_pwd = $_GET['pw'];
 		} else {
 			$db_pwd ="";
+      $db_pwd = getenv('MYSQL_PASSWORD');
 		}
 		if(isset($_GET['m'])) {
 			$method = $_GET['m'];
