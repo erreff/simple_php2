@@ -15,11 +15,11 @@
 			<TABLE id="TableInput" cellSpacing="1" cellPadding="1" width="380" border="0"  >
 				<TR>
 					<TD>Serveur MySQL (s)</TD>
-					<TD><INPUT id="inputSrv" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputSrv'];} else {echo getenv('MYSQL_SERVICE_HOST') ;} ?>" name="inputSrv"></TD>
+					<TD><INPUT id="inputSrv" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputSrv'];} else {echo getenv(getenv('MYSQL_SERVICE_NAME').'_SERVICE_HOST') ;} ?>" name="inputSrv"></TD>
 				</TR>
 				<TR>
 					<TD>Port (p)</TD>
-					<TD><INPUT id="inputPort" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputPort'];} else {echo getenv('MYSQL_SERVICE_PORT') ;} ?>" name="inputPort"></TD>
+					<TD><INPUT id="inputPort" type="text" value="<?php if (count($_POST)!= 0 ){echo $_POST['inputPort'];} else {echo getenv(getenv('MYSQL_SERVICE_NAME').'_SERVICE_PORT') ;} ?>" name="inputPort"></TD>
 				</TR>
 				<TR>
 					<TD>Utilisateur (u)</TD>
@@ -93,14 +93,14 @@
 				$strRetour=mysqli_connect_error();
 				return false;
 			}
-			/* Requête "Select" retourne un jeu de résultats */
+			/* RequÃªte "Select" retourne un jeu de rÃ©sultats */
 			if ($result = $mysqli->query(self::SQL_QUERY)) {
 			
 				$row = $result->fetch_row();
 				// Affectation du retour
 				$strRetour=$row[0];
 				
-				/* Libération du jeu de résultats */
+				/* LibÃ©ration du jeu de rÃ©sultats */
 				$result->free();
 			}
 			// Fermeture connexion
