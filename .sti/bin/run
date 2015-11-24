@@ -21,6 +21,6 @@ envsubst < /opt/app-root/etc/php.d/opcache.ini.template > /opt/rh/php55/root/etc
 # Test send error to stdout and file
 touch /tmp/error_log
 chmod 777 /tmp/error_log
-sed -i 's/^ErrorLog.*/ErrorLog "| tee -a \/tmp\/error_log"/g' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
+sed -i 's/^ErrorLog.*/ErrorLog "|\/usr\/bin\/tee -a \/tmp\/error_log"/g' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
 
 exec httpd -D FOREGROUND
