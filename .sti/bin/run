@@ -18,9 +18,7 @@ export PHP_INI_SCAN_DIR=${PHP_INI_SCAN_DIR:-/opt/rh/php55/root/etc/php.d}
 envsubst < /opt/app-root/etc/php.ini.template > /opt/rh/php55/root/etc/php.ini
 envsubst < /opt/app-root/etc/php.d/opcache.ini.template > /opt/rh/php55/root/etc/php.d/opcache.ini
 
-mkdir /tmp/tnsadmin
-export TNS_ADMIN=/tmp/tnsadmin
-
-echo "SQLNET.EXPIRE_TIME=10" > /tmp/tnsadmin/sqlnet.ora
+# Test send error to stdout and file
+sed -i 's/^ErrorLog.*/ErrorLog "| tee -a \/tmp\/error_log"/g' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
 
 exec httpd -D FOREGROUND
