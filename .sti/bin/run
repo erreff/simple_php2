@@ -23,4 +23,10 @@ touch /tmp/error_log
 chmod 777 /tmp/error_log
 sed -i 's/^ErrorLog.*/ErrorLog "|\/usr\/bin\/tee -a \/tmp\/error_log"/g' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
 
+touch /tmp/access_log
+chmod 777 /tmp/access_log
+sed -i 's/^ *CustomLog.*/ CustomLog "|\/usr\/bin\/tee -a \/tmp\/access_log" combined/g' /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf
+
+CustomLog "/tmp/access_log" combined
+
 exec httpd -D FOREGROUND
