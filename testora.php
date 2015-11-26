@@ -175,21 +175,24 @@
 			$db_host = $_GET['s'];
 		} else {
 			$db_host = "tns_oracle";
+      $db_host = '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=' . getenv('OPENSHIFT_ORACLE_DB_HOST') . ')(PORT=' . getenv('OPENSHIFT_ORACLE_DB_PORT') . ')))(CONNECT_DATA=(SERVICE_NAME=' . getenv('OPENSHIFT_ORACLE_DB_SERVICE') . ')))';
 		}
 		if(isset($_GET['u'])) {
 			$db_user = $_GET['u'];
 		} else {
 			$db_user ="login_oracle";
+      $db_user =getenv('OPENSHIFT_ORACLE_DB_USERNAME');
 		}
 		if(isset($_GET['pw'])) {
 			$db_pwd = $_GET['pw'];
 		} else {
 			$db_pwd ="";
+      $db_pwd =getenv('OPENSHIFT_ORACLE_DB_PASSWORD');
 		}
 		if(isset($_GET['m'])) {
 			$method = $_GET['m'];
 		} else {
-			$method = 0;
+			$method = 1;
 		}
 	}
 	$ch_retour='';
